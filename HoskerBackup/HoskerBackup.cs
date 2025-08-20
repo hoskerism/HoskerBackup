@@ -172,7 +172,7 @@ namespace HoskerBackup
 			this.Hide();
 		}
 
-		Config Config => config ?? (config = new Config());
+		Config Config => config ?? (config = Config.Load());
 		Config config;
 
 		private void btnIncludeFolders_Click(object sender, EventArgs e)

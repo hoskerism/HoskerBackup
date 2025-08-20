@@ -679,7 +679,7 @@ namespace HoskerBackup
 
 		DateTime lastRun;
 
-		Config Config => config ?? (config = new Config());
+		Config Config => config ?? (config = Config.Load());
 		Config config;
 
 		public string Log => log.ToString();

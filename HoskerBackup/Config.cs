@@ -16,7 +16,8 @@ public class Config
 		".DS_Store",
 		"$RECYCLE.BIN",
 		"Recycle Bin",
-		"System Volume Information"
+		"System Volume Information",
+		"*.vsidx"
 	};
 
 	// Instance properties (as before)
