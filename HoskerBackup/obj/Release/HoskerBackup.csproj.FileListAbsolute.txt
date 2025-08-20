@@ -1,0 +1,12 @@
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\bin\Release\HoskerBackup.exe.config
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\bin\Release\HoskerBackup.exe
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\bin\Release\HoskerBackup.pdb
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Release\HoskerBackup.csproj.AssemblyReference.cache
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Release\HoskerBackup.HoskerBackup.resources
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Release\HoskerBackup.LogForm.resources
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Release\HoskerBackup.Properties.Resources.resources
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Release\HoskerBackup.csproj.GenerateResource.cache
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Release\HoskerBackup.csproj.CoreCompileInputs.cache
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Release\HoskerBackup.exe
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Release\HoskerBackup.pdb
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Release\HoskerBackup.exe.config

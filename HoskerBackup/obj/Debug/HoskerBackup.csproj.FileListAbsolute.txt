@@ -1,0 +1,35 @@
+C:\Users\rob\source\repos\HoskerBackup\HoskerBackup\bin\Debug\HoskerBackup.exe.config
+C:\Users\rob\source\repos\HoskerBackup\HoskerBackup\bin\Debug\HoskerBackup.exe
+C:\Users\rob\source\repos\HoskerBackup\HoskerBackup\bin\Debug\HoskerBackup.pdb
+C:\Users\rob\source\repos\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.csproj.AssemblyReference.cache
+C:\Users\rob\source\repos\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.HoskerBackup.resources
+C:\Users\rob\source\repos\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.Properties.Resources.resources
+C:\Users\rob\source\repos\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.csproj.GenerateResource.cache
+C:\Users\rob\source\repos\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.csproj.CoreCompileInputs.cache
+C:\Users\rob\source\repos\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.exe
+C:\Users\rob\source\repos\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.pdb
+C:\Users\rob\source\repos\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.LogForm.resources
+D:\Users\temp\HoskerBackup\HoskerBackup\bin\Debug\HoskerBackup.exe.config
+D:\Users\temp\HoskerBackup\HoskerBackup\bin\Debug\HoskerBackup.exe
+D:\Users\temp\HoskerBackup\HoskerBackup\bin\Debug\HoskerBackup.pdb
+D:\Users\temp\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.csproj.AssemblyReference.cache
+D:\Users\temp\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.csproj.SuggestedBindingRedirects.cache
+D:\Users\temp\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.HoskerBackup.resources
+D:\Users\temp\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.LogForm.resources
+D:\Users\temp\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.Properties.Resources.resources
+D:\Users\temp\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.csproj.GenerateResource.cache
+D:\Users\temp\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.csproj.CoreCompileInputs.cache
+D:\Users\temp\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.exe
+D:\Users\temp\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.pdb
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\bin\Debug\HoskerBackup.exe.config
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\bin\Debug\HoskerBackup.exe
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\bin\Debug\HoskerBackup.pdb
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.csproj.AssemblyReference.cache
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.exe.config
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.HoskerBackup.resources
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.LogForm.resources
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.Properties.Resources.resources
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.csproj.GenerateResource.cache
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.csproj.CoreCompileInputs.cache
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.exe
+C:\Users\rob\Documents\Visual Studio Projects\HoskerBackup\HoskerBackup\obj\Debug\HoskerBackup.pdb
