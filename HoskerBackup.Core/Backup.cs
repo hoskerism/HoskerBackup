@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HoskerBackup
+namespace HoskerBackup.Core
 {
 	public class Backup
 	{
