@@ -1,108 +1,84 @@
-﻿using HoskerBackup.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Text.Json;
 
-namespace HoskerBackup
+public class Config
 {
-	class Config
+	// Static mandatory exclusions (added back; not serialized to JSON)
+	public static readonly List<string> MandatoryExclusionPatterns = new List<string>
 	{
-		public Config()
+		"thumbs*.db",
+		"*.tmp",
+		"*.temp",
+		"~$*.*",
+		"~.backup",
+		".DS_Store",
+		"$RECYCLE.BIN",
+		"Recycle Bin",
+		"System Volume Information"
+	};
+
+	// Instance properties (as before)
+	public List<string> IncludeFolders { get; set; } = new List<string>();
+	public List<string> ExcludeFolders { get; set; } = new List<string>();
+	public List<string> UserExcludePatterns { get; set; } = new List<string>();
+	public string DestinationDirectory { get; set; } = "";
+	public int ScheduleHour { get; set; } = 3; // Default to 3 AM
+	public int ScheduleMinute { get; set; } = 0;
+	public int KeepDeletedFilesFor { get; set; } = 7;
+	public DateTime? LastRun { get; set; }
+
+	public List<string> ExcludePatterns => UserExcludePatterns.Union(MandatoryExclusionPatterns).ToList<string>();
+
+	public Config() { }
+
+	// Validation method
+	public bool IsValid
+	{
+		get
 		{
-			IncludeFolders = Helper.ConvertToSet(Settings.Default["IncludeFolders"].ToString().Split(','));
-			ExcludeFolders = Helper.ConvertToSet(Settings.Default["ExcludeFolders"].ToString().Split(','));
-			ExcludePatterns = Helper.ConvertToSet(Settings.Default["ExcludePatterns"].ToString().Split(','));
-			ExcludePatterns.UnionWith(MandatoryExcludePatterns);
-
-			Destination = Settings.Default["Destination"].ToString();
-			ScheduleHour = (int)Settings.Default["ScheduleHour"];
-			ScheduleMinute = (int)Settings.Default["ScheduleMinute"];
-			KeepDeletedFilesFor = (int)Settings.Default["KeepDeletedFilesFor"];
-		}
-
-		public void SaveConfig()
-		{
-			Settings.Default["IncludeFolders"] = string.Join(",", IncludeFolders);
-			Settings.Default["ExcludeFolders"] = string.Join(",", ExcludeFolders);
-			
-			ExcludePatterns.UnionWith(MandatoryExcludePatterns);
-			Settings.Default["ExcludePatterns"] = string.Join(",", ExcludePatterns);
-
-			Settings.Default["Destination"] = Destination;
-			Settings.Default["ScheduleHour"] = ScheduleHour;
-			Settings.Default["ScheduleMinute"] = ScheduleMinute;
-			Settings.Default["KeepDeletedFilesFor"] = KeepDeletedFilesFor;
-			
-			Settings.Default.Save();
-		}
-
-		string[] MandatoryExcludePatterns
-		{
-			get
+			if (string.IsNullOrEmpty(DestinationDirectory) || !Directory.Exists(DestinationDirectory))
 			{
-				return new[]
-				{
-					"thumbs*.db",
-					"*.tmp",
-					"*.temp",
-					"~$*.*",
-					"~.backup",
-					".DS_Store",
-					"$RECYCLE.BIN",
-					"Recycle Bin",
-					"System Volume Information"
-				};
+				return false;
+			}
+			return true;
+		}
+	}
+
+	// Save to JSON (static list not included)
+	public void Save()
+	{
+		try
+		{
+			string configDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "HoskerBackup");
+			Directory.CreateDirectory(configDir);
+			string configPath = Path.Combine(configDir, "config.json");
+			string json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+			File.WriteAllText(configPath, json);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error saving config: {ex.Message}");
+		}
+	}
+
+	// Load from JSON
+	public static Config Load()
+	{
+		try
+		{
+			string configPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "HoskerBackup", "config.json");
+			if (File.Exists(configPath))
+			{
+				string json = File.ReadAllText(configPath);
+				return JsonSerializer.Deserialize<Config>(json);
 			}
 		}
-
-		public SortedSet<string> IncludeFolders { get; set; }
-
-		public SortedSet<string> ExcludeFolders { get; set; }
-
-		public SortedSet<string> ExcludePatterns { get; set; }
-
-		public string Destination { get; set; }
-
-		public int ScheduleHour { get; set; }
-
-		public int ScheduleMinute { get; set; }
-
-		public int KeepDeletedFilesFor { get; set; }
-
-		public bool IsValid
+		catch (Exception ex)
 		{
-			get 
-			{
-				var isValid = IncludeFolders.Any()					
-					&& ScheduleHour >= 0 && ScheduleHour < 24
-					&& ScheduleMinute >= 0 && ScheduleMinute < 60
-					&& KeepDeletedFilesFor > 0;
-
-				if (!isValid)
-				{
-					return false;
-				}
-
-				if (!Directory.Exists(Destination))
-				{
-					// Wait a few seconds then try again
-					if (!iHaveWaited)
-					{
-						Thread.Sleep(10000);
-						iHaveWaited = true;
-					}
-
-					return Directory.Exists(Destination);
-				}
-
-				return true;
-			}
+			Console.WriteLine($"Error loading config: {ex.Message}");
 		}
-
-		bool iHaveWaited = false;
+		return new Config();
 	}
 }

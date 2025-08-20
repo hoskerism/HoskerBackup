@@ -1,8 +1,9 @@
-﻿using Microsoft.VisualBasic;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Interop;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -13,23 +14,24 @@ namespace HoskerBackup
 {
 	public partial class HoskerBackup : Form
 	{
+		private ContextMenuStrip trayContextMenuStrip = new ContextMenuStrip();
+
 		public HoskerBackup()
 		{
 			InitializeComponent();
-			LoadConfig();
+			LoadConfigToUI();
 
 			// Create the tray icon
 			trayIcon = new NotifyIcon();
 			trayIcon.Text = "Hosker Backup";
 
 			// Create a context menu for the tray icon
-			trayMenu = new ContextMenu();
-			trayMenu.MenuItems.Add("Open", OnOpen);
-			trayMenu.MenuItems.Add("View Log", OnViewLog);
-			trayMenu.MenuItems.Add("Exit", OnExit);
+			trayContextMenuStrip.Items.Add("Open", null, OnOpen);
+			trayContextMenuStrip.Items.Add("View Log", null, OnViewLog);
+			trayContextMenuStrip.Items.Add("Exit", null, OnExit);
 
 			// Assign the context menu to the tray icon
-			trayIcon.ContextMenu = trayMenu;
+			trayIcon.ContextMenuStrip = trayContextMenuStrip;
 
 			SetIcon(Config.IsValid);
 
@@ -90,7 +92,7 @@ namespace HoskerBackup
 			this.WindowState = FormWindowState.Normal;
 			this.ShowInTaskbar = true;
 			this.Show(); // Show the form when "Open" is clicked
-			LoadConfig();
+			LoadConfigToUI();
 		}
 
 		private void OnExit(object sender, EventArgs e)
@@ -100,13 +102,13 @@ namespace HoskerBackup
 			Application.Exit(); // Terminate the application
 		}
 
-		void LoadConfig()
+		void LoadConfigToUI()
 		{
 			PopulateListBox(listIncludeFolders, Config.IncludeFolders);
 			PopulateListBox(listExcludeFolders, Config.ExcludeFolders);
 			PopulateListBox(listExcludePatterns, Config.ExcludePatterns);
 
-			txtDestination.Text = Config.Destination;
+			txtDestination.Text = Config.DestinationDirectory;
 			txtHour.Text = Config.ScheduleHour.ToString();
 			txtMinute.Text = Config.ScheduleMinute.ToString();
 			txtKeepDeletedFilesFor.Text = Config.KeepDeletedFilesFor.ToString();
@@ -124,17 +126,17 @@ namespace HoskerBackup
 
 		private void btnSave_Click(object sender, EventArgs e)
 		{
-			Config.IncludeFolders = Helper.ConvertToSet(listIncludeFolders.Items.Cast<string>().Where(i => i != ""));
-			Config.ExcludeFolders = Helper.ConvertToSet(listExcludeFolders.Items.Cast<string>().Where(i => i != ""));
-			Config.ExcludePatterns = Helper.ConvertToSet(listExcludePatterns.Items.Cast<string>().Where(i => i != ""));
+			Config.IncludeFolders = listIncludeFolders.Items.Cast<string>().Where(i => i != "").ToList<string>();
+			Config.ExcludeFolders = listExcludeFolders.Items.Cast<string>().Where(i => i != "").ToList<string>();
+			Config.UserExcludePatterns = listExcludePatterns.Items.Cast<string>().Where(i => i != "").ToList<string>();
 
-			Config.Destination = txtDestination.Text;
+			Config.DestinationDirectory = txtDestination.Text;
 
 			if (int.TryParse(txtHour.Text, out _))
 			{
 				Config.ScheduleHour = int.Parse(txtHour.Text);
 			}
-			
+
 			if (int.TryParse(txtMinute.Text, out _))
 			{
 				Config.ScheduleMinute = int.Parse(txtMinute.Text);
@@ -145,7 +147,7 @@ namespace HoskerBackup
 				Config.KeepDeletedFilesFor = int.Parse(txtKeepDeletedFilesFor.Text);
 			}
 
-			Config.SaveConfig();
+			Config.Save();
 
 			StartSchedule();
 		}
@@ -249,7 +251,7 @@ namespace HoskerBackup
 		private void tmrSchedule_Tick(object sender, EventArgs e)
 		{
 			SetIcon(Backup.Status, Backup.StatusMessage);
-			
+
 			if (Backup.IsRunning)
 			{
 				lblProgress.Text = Backup.ProgressMessage;
@@ -263,14 +265,13 @@ namespace HoskerBackup
 			if (!Backup.HasRunToday
 				&& DateTime.Now.TimeOfDay >= new TimeSpan(Config.ScheduleHour, Config.ScheduleMinute, 0))
 			{
-				Task.Run(() => Backup.RunBackup());				
+				Task.Run(() => Backup.RunBackup());
 			}
 		}
 
 		NotifyIcon trayIcon;
-		ContextMenu trayMenu;
 
-		Backup Backup => backup ?? (backup = new Backup());
+		Backup Backup => backup ?? (backup = new Backup(Config));
 		Backup backup;
 	}
 }

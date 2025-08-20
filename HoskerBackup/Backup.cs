@@ -12,6 +12,10 @@ namespace HoskerBackup
 {
 	public class Backup
 	{
+		public Backup(Config config)
+		{
+			this.config = config;
+		}
 
 		public void RunBackup()
 		{
@@ -163,7 +167,7 @@ namespace HoskerBackup
 				return false;
 			}
 
-			return !Config.ExcludeFolders.Contains(folder);			
+			return !Config.ExcludeFolders.Contains(folder);
 		}
 
 		void BackupFile(string folder, string filename, List<string> folderLogs)
@@ -218,7 +222,7 @@ namespace HoskerBackup
 				debugLog.AppendLine("CopyFile(" + folder + ", " + filename + ", " + destinationFolder + ", " + destinationFilename + ")");
 
 				CreateDirectory(destinationFolder);
-				debugLog.AppendLine("Created folder: " +  destinationFolder);
+				debugLog.AppendLine("Created folder: " + destinationFolder);
 
 				var overwrite = !VersionFile(destinationFolder, destinationFilename);
 				debugLog.AppendLine("Overwrite: " + overwrite);
@@ -303,9 +307,9 @@ namespace HoskerBackup
 
 			var sourceFileInfo = new FileInfo(folder + "\\" + filename);
 			var destinationFileInfo = new FileInfo(destinationFolder + "\\" + destinationFilename);
-			
+
 			return sourceFileInfo.LastWriteTime != destinationFileInfo.LastWriteTime
-				|| sourceFileInfo.Length != destinationFileInfo.Length;			
+				|| sourceFileInfo.Length != destinationFileInfo.Length;
 		}
 
 		bool MatchesExcludePattern(string folder, string name, List<string> folderLogs = null)
@@ -333,7 +337,7 @@ namespace HoskerBackup
 
 		string GetDestinationFolderName(string folder)
 		{
-			string destinationFolderName = Config.Destination + "\\" + folder
+			string destinationFolderName = Config.DestinationDirectory + "\\" + folder
 				.Replace(":", "")
 				.Replace("\\\\", "\\");
 
@@ -385,9 +389,9 @@ namespace HoskerBackup
 				}
 
 				var index = i.ToString();
-				
+
 				(var stem, var extension) = SplitFilename(filename);
-				
+
 				if (stem.Length < shrinkBy + index.Length + 1)
 				{
 					throw new ApplicationException("Can't shorten filename " + filename + " by " + shrinkBy + index.Length + 1);
@@ -422,7 +426,7 @@ namespace HoskerBackup
 
 			var stem = filename;
 			var extension = "";
-			
+
 			if (allParts.Length > 1)
 			{
 				extension = allParts[allParts.Length - 1];
@@ -504,7 +508,7 @@ namespace HoskerBackup
 		void DeleteOldBackupFiles(string destinationFolder, List<string> folderLogs)
 		{
 			foreach (var log in folderLogs.Where(l => l.StartsWith("File Deleted: ")).ToArray())
-			{				
+			{
 				var logParams = log.Substring("File Deleted: ".Length).Split('|');
 				var originalFilename = logParams[0];
 				var dateDeleted = DateTime.Parse(logParams[1]);
@@ -529,7 +533,7 @@ namespace HoskerBackup
 						this.log.AppendLine("Backup Deleted: " + originalFilename + " - " + logMessage);
 
 					}
-					
+
 					folderLogs.RemoveAll(l => l == log);
 				}
 			}
@@ -696,7 +700,7 @@ namespace HoskerBackup
 			{
 				if (maxFilenameLength == 0)
 				{
-					maxFilenameLength = Helper.GetMaxFilenameLength(Config.Destination);
+					maxFilenameLength = Helper.GetMaxFilenameLength(Config.DestinationDirectory);
 				}
 
 				return maxFilenameLength > 0 ? maxFilenameLength : maxFilePath;

@@ -63,8 +63,8 @@ namespace HoskerBackup
 			// 
 			// grpInclude
 			// 
-			this.grpInclude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.grpInclude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.grpInclude.Controls.Add(this.btnDeleteIncludeFolder);
 			this.grpInclude.Controls.Add(this.listIncludeFolders);
 			this.grpInclude.Controls.Add(this.btnIncludeFolders);
@@ -91,9 +91,9 @@ namespace HoskerBackup
 			// 
 			// listIncludeFolders
 			// 
-			this.listIncludeFolders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.listIncludeFolders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			| System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.listIncludeFolders.FormattingEnabled = true;
 			this.listIncludeFolders.Location = new System.Drawing.Point(6, 19);
 			this.listIncludeFolders.Margin = new System.Windows.Forms.Padding(1);
@@ -115,9 +115,9 @@ namespace HoskerBackup
 			// 
 			// listExcludeFolders
 			// 
-			this.listExcludeFolders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.listExcludeFolders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			| System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.listExcludeFolders.FormattingEnabled = true;
 			this.listExcludeFolders.Location = new System.Drawing.Point(6, 19);
 			this.listExcludeFolders.Margin = new System.Windows.Forms.Padding(1);
@@ -139,8 +139,8 @@ namespace HoskerBackup
 			// 
 			// groupExcludeFolders
 			// 
-			this.groupExcludeFolders.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupExcludeFolders.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.groupExcludeFolders.Controls.Add(this.btnDeleteExcludeFolder);
 			this.groupExcludeFolders.Controls.Add(this.listExcludeFolders);
 			this.groupExcludeFolders.Controls.Add(this.btnExcludeFolders);
@@ -167,9 +167,9 @@ namespace HoskerBackup
 			// 
 			// listExcludePatterns
 			// 
-			this.listExcludePatterns.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.listExcludePatterns.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			| System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.listExcludePatterns.FormattingEnabled = true;
 			this.listExcludePatterns.Location = new System.Drawing.Point(6, 19);
 			this.listExcludePatterns.Margin = new System.Windows.Forms.Padding(1);
@@ -191,8 +191,8 @@ namespace HoskerBackup
 			// 
 			// grpExcludePatterns
 			// 
-			this.grpExcludePatterns.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.grpExcludePatterns.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.grpExcludePatterns.Controls.Add(this.btnDeleteExcludePattern);
 			this.grpExcludePatterns.Controls.Add(this.listExcludePatterns);
 			this.grpExcludePatterns.Controls.Add(this.btnAddExcludePattern);
