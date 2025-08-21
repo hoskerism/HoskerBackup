@@ -67,11 +67,11 @@ namespace HoskerBackup.Core
 		}
 
 		// Load from JSON
-		public static Config Load()
+		public static Config Load(string customPath = null)
 		{
 			try
 			{
-				string configPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "HoskerBackup", "config.json");
+				string configPath = customPath ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "HoskerBackup", "config.json");
 				if (File.Exists(configPath))
 				{
 					string json = File.ReadAllText(configPath);

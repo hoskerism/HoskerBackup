@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoskerBackup.Core", "HoskerBackup.Core\HoskerBackup.Core.csproj", "{ED382DB6-A68E-4581-88A1-E28D00B4EC5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoskerBackupService", "HoskerBackupService\HoskerBackupService.csproj", "{C29EAD02-0812-4872-A142-05B3275C9617}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{ED382DB6-A68E-4581-88A1-E28D00B4EC5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED382DB6-A68E-4581-88A1-E28D00B4EC5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED382DB6-A68E-4581-88A1-E28D00B4EC5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C29EAD02-0812-4872-A142-05B3275C9617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C29EAD02-0812-4872-A142-05B3275C9617}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C29EAD02-0812-4872-A142-05B3275C9617}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C29EAD02-0812-4872-A142-05B3275C9617}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
