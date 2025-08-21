@@ -1,15 +1,7 @@
 using HoskerBackup.Core;
 using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
-using System.Drawing.Interop;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.ServiceProcess;
 
 namespace HoskerBackup
 {
@@ -157,13 +149,27 @@ namespace HoskerBackup
 		{
 			if (Config.IsValid)
 			{
-				tmrSchedule.Enabled = true;
+				tmrSchedule.Enabled = !IsServiceInstalled("HoskerBackupService"); // Disable timer if service is installed
 				SetIcon(true);
 			}
 			else
 			{
 				tmrSchedule.Enabled = false;
 				SetIcon(false, "Invalid Config");
+			}
+		}
+
+		bool IsServiceInstalled(string serviceName)
+		{
+			try
+			{
+				ServiceController sc = new ServiceController(serviceName);
+				_ = sc.Status; // If no exception, it's installed (status throws if not)
+				return true; // Service is installed
+			}
+			catch (InvalidOperationException)
+			{
+				return false; // Not installed
 			}
 		}
 

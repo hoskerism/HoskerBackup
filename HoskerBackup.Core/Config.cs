@@ -31,6 +31,8 @@ namespace HoskerBackup.Core
 		public int ScheduleMinute { get; set; } = 0;
 		public int KeepDeletedFilesFor { get; set; } = 7;
 		public DateTime? LastRun { get; set; }
+		public bool LastBackupSuccess { get; set; } = true; // Default to success (green icon)
+		public string UserAppDataPath { get; set; }
 
 		public List<string> ExcludePatterns => UserExcludePatterns.Union(MandatoryExclusionPatterns).ToList<string>();
 
@@ -69,20 +71,19 @@ namespace HoskerBackup.Core
 		// Load from JSON
 		public static Config Load(string customPath = null)
 		{
-			try
+			string configPath = customPath ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "HoskerBackup", "config.json");
+			if (File.Exists(configPath))
 			{
-				string configPath = customPath ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "HoskerBackup", "config.json");
-				if (File.Exists(configPath))
-				{
-					string json = File.ReadAllText(configPath);
-					return JsonSerializer.Deserialize<Config>(json);
-				}
+				string json = File.ReadAllText(configPath);
+				Config config = JsonSerializer.Deserialize<Config>(json);
+				config.UserAppDataPath = Path.GetDirectoryName(Path.GetDirectoryName(configPath)); // Derive from configPath (e.g., removes \HoskerBackup\config.json)
+				return config;
 			}
-			catch (Exception ex)
-			{
-				Console.WriteLine($"Error loading config: {ex.Message}");
-			}
-			return new Config();
+
+			return new Config 
+			{ 
+				UserAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) // Default for GUI
+			}; 
 		}
 	}
 }

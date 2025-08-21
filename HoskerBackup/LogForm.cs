@@ -8,7 +8,7 @@ namespace HoskerBackup
 		public LogForm(Backup backup)
 		{
 			InitializeComponent();
-			txtLog.Text = backup.Log;
+			txtLog.Text = backup.GetLog();
 		}
 	}
 }

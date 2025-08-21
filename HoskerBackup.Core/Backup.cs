@@ -53,6 +53,8 @@ namespace HoskerBackup.Core
 
 				StatusMessage = "Backed up " + fileCount + " file(s) in " + folderCount + " folder(s) in " + timeTaken.ToString("hh") + ":" + timeTaken.ToString("mm") + ":" + timeTaken.ToString("ss");
 				log.AppendLine(StatusMessage);
+
+				config.LastBackupSuccess = Status;
 			}
 			catch (Exception e)
 			{
@@ -61,11 +63,16 @@ namespace HoskerBackup.Core
 				ProgressMessage = e.Message;
 				log.AppendLine(e.Message + "(" + e.GetType().ToString() + " at " + DateTime.Now.ToString("s") + ")");
 				log.AppendLine(e.StackTrace);
+
+				config.LastBackupSuccess = false;
 			}
 			finally
 			{
-				lastRun = DateTime.Now;
+				config.LastRun = DateTime.Now;
 				IsRunning = false;
+
+				config.Save();
+				WriteLogToFile(log.ToString());
 			}
 		}
 
@@ -644,6 +651,7 @@ namespace HoskerBackup.Core
 			return new List<string>();
 		}
 
+		// This is confusingly named. It's the file and folder log for the backup, not the log of the backup process.
 		void WriteLog(string folder, List<string> logs)
 		{
 			var logsToWrite = logs.Where(l => l != "");
@@ -653,6 +661,15 @@ namespace HoskerBackup.Core
 				CreateDirectory(destinationFolderName);
 				File.WriteAllLines(destinationFolderName + "\\" + logFileName, logsToWrite);
 			}
+		}
+
+		// This one is the log of the backup process, not the file and folder log.
+		private void WriteLogToFile(string logContent)
+		{
+			string logDir = Path.Combine(config.UserAppDataPath, "HoskerBackup");
+			string logPath = Path.Combine(logDir, "log.txt");
+			Directory.CreateDirectory(logDir); // Ensure exists
+			File.AppendAllText(logPath, $"{DateTime.Now}: {logContent}\n");
 		}
 
 		bool IsCriticalException(Exception e)
@@ -675,14 +692,25 @@ namespace HoskerBackup.Core
 
 		public string StatusMessage { get; private set; } = "";
 
-		public bool HasRunToday => lastRun.Date == DateTime.Today;
-
-		DateTime lastRun;
+		public bool HasRunToday => Config.LastRun?.Date == DateTime.Today;
 
 		Config Config => config ?? (config = Config.Load());
 		Config config;
 
-		public string Log => log.ToString();
+		public string GetLog()
+		{
+			string logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "HoskerBackup", "log.txt");
+			if (File.Exists(logPath))
+			{
+				string logContent = File.ReadAllText(logPath);
+				return logContent;
+			}
+			else
+			{
+				return "No log file found.";
+			}
+		}
+
 		StringBuilder log = new StringBuilder();
 
 		DateTime startTime;
